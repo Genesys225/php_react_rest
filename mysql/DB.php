@@ -1,9 +1,9 @@
 <?php 
     class DB {
-        private $servername = "localhost:3307";
+        private $servername = "localhost:3306";
         private $username = "root";
-        private $password = "123456";
-        private $dbname = "countries";
+        private $password = "";
+        private $dbname = "world";
         private $conn;
         
         // Create connection

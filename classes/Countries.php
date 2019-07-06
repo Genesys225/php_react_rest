@@ -14,5 +14,5 @@ class Countries
     }
 }
 
-require_once('DB.php');
+require_once($_SERVER["DOCUMENT_ROOT"] . "/mysql/DB.php");
 ?>

@@ -11,13 +11,8 @@ const router = express.Router();
 router.post("*", (req, res, next) => {
   const activeRoute = routes.find(route => matchPath(req.url, route)) || {};
   console.log(req.url);
-  const promise = activeRoute.fetchInitialData
-    ? activeRoute.fetchInitialData(req.path)
-    : Promise.resolve("GOOD");
-
-  promise
-    .then(data => {
-      const context = { data };
+  
+      const {data: context} =  req.body.data ;
 
       const markup = renderToString(
         <StaticRouter location={req.url} context={context}>
@@ -26,8 +21,7 @@ router.post("*", (req, res, next) => {
       );
 
       res.send(`${markup}, ${serialize(context)}`);
-    })
-    .catch(next);
+    
 });
 
 router.get("/", (req, res, next) => {

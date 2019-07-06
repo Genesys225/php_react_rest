@@ -2,7 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-type: application/json");
 include_once "../../mysql/DB.php";
-include_once "../../mysql/getCountries.php";
+include_once "../../classes/Countries.php";
 
 $database = new DB();
 $db = $database->connect();
