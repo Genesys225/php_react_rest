@@ -2,7 +2,7 @@
     class DB {
         private $servername = "localhost:3306";
         private $username = "root";
-        private $password = "xxx12345";
+        private $password = ""; // "xxx12345";
         private $dbname = "world";
         private $conn;
         
@@ -20,5 +20,3 @@
             return $this->conn;
         }
     }
-
-?>

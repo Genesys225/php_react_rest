@@ -1,36 +1,20 @@
-import React, { Component } from "react";
+import React from "react";
 import routes from "./routes";
-import { Route, Link, Redirect, Switch } from "react-router-dom";
 import Navbar from "./Navbar";
-import NoMatch from "./NoMatch";
+
 // import "./App.css";
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <Navbar />
-
-        <Switch>
-          {routes.map(({ path, exact, component, ...rest }) => (
-            <Route
-              key={path}
-              path={path}
-              exact={exact}
-              render={props =>
-                React.cloneElement(
-                  component,
-                  { ...props, ...rest },
-                  props.children
-                )
-              }
-            />
-          ))}
-          <Route render={props => <NoMatch {...props} />} />
-        </Switch>
-      </div>
-    );
-  }
+function App({ req }) {
+  const { component } = routes.find(({ path }) => req.originalUrl === path);
+  console.log(req.originalUrl, component);
+  console.log(req.body);
+  const { data } = req.body;
+  return (
+    <div>
+      {/* <Navbar /> */}
+      {React.cloneElement(component, data)}
+    </div>
+  );
 }
 
 export default App;

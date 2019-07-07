@@ -1,10 +1,13 @@
 import express from "express";
 import cors from "cors";
 import router from "../../nodeApi/rendering-service/component";
+import bodyParser from "body-parser";
 
 const app = express();
 
 app.use(cors());
+app.use(bodyParser.json());
+
 app.use(express.static("public"));
 app.use("*", router);
 

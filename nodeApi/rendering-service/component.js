@@ -9,40 +9,31 @@ import App from "../../src/shared/App";
 const router = express.Router();
 
 router.post("*", (req, res, next) => {
-  const activeRoute = routes.find(route => matchPath(req.url, route)) || {};
-  console.log(req.url);
-  
-      const {data: context} =  req.body.data ;
+  console.log(req.originalUrl);
+  const markup = renderToString(<App req={req} />);
 
-      const markup = renderToString(
-        <StaticRouter location={req.url} context={context}>
-          <App />
-        </StaticRouter>
-      );
-
-      res.send(`${markup}, ${serialize(context)}`);
-    
+  res.send(`${markup}, ${serialize(req.body.data)}`);
 });
 
-router.get("/", (req, res, next) => {
-  const activeRoute = routes.find(route => matchPath(req.url, route)) || {};
+// router.get("/", (req, res, next) => {
+//   const activeRoute = routes.find(route => matchPath(req.url, route)) || {};
 
-  const promise = activeRoute.fetchInitialData
-    ? activeRoute.fetchInitialData(req.path)
-    : Promise.resolve("GOOD");
+//   const promise = activeRoute.fetchInitialData
+//     ? activeRoute.fetchInitialData(req.path)
+//     : Promise.resolve("GOOD");
 
-  promise
-    .then(data => {
-      const context = { data };
-      const markup = renderToString(
-        <StaticRouter location={req.url} context={context}>
-          <App />
-        </StaticRouter>
-      );
+//   promise
+//     .then(data => {
+//       const context = { data };
+//       const markup = renderToString(
+//         <StaticRouter location={req.url} context={context}>
+//           <App />
+//         </StaticRouter>
+//       );
 
-      res.send(`${markup}!!, ${serialize(context)}`);
-    })
-    .catch(next);
-});
+//       res.send(`${markup}!!, ${serialize(context)}`);
+//     })
+//     .catch(next);
+// });
 
 module.exports = router;
