@@ -16,9 +16,11 @@ class City
         $result = $this->runQuery('SELECT * FROM ' . $this->table);
         return $result;
     }
-    public function getById(String $id)
+    
+    public function getByName($name)
     {
-        $result = $this->runQuery("SELECT * FROM $this->table WHERE Code = $id "); 
+        $result = $this->runQuery("SELECT * FROM $this->table WHERE Name = '$name' "); 
+        print_r($result);
         return $result;
     }
 }

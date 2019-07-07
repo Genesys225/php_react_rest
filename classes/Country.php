@@ -1,10 +1,15 @@
 <?php 
-class Countries  
+class Country  
 {
     private $conn;
-    private $table = 'apps_countries';
+    private $table = 'country';
     public function __construct($db){
         $this->conn = $db;
+    }
+    public function getById(String $id)
+    {
+        $result = $this->runQuery("SELECT * FROM $this->table WHERE Code = $id "); 
+        return $result;
     }
     public function read(){
         $sql = 'SELECT * FROM ' . $this->table;
